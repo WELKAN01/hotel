@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="835" pageHeight="600" orientation="Landscape" columnWidth="795" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9c9e0215-fbab-474e-9be3-3d11e68f8c72">
+	<property name="ireport.zoom" value="1.6105100000000014"/>
+	<property name="ireport.x" value="38"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="PieChartDataset" uuid="b48f7e46-cb04-4684-a4fd-a61cbd1364ae"/>
+	<queryString>
+		<![CDATA[SELECT 
+f.habitacion,
+count(d.numero_ha) as Cantidad
+from habitacion d inner join reserva_view f on d.numero_ha=f.Habitacion group by (f.habitacion) ORDER BY  count(d.numero_ha) DESC ;]]>
+	</queryString>
+	<field name="Habitacion" class="java.lang.String"/>
+	<field name="Cantidad" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="94" splitType="Stretch">
+			<staticText>
+				<reportElement style="SubTitle" x="336" y="65" width="449" height="29" uuid="ca91760a-5105-4399-a8f9-6befeb90e3be"/>
+				<textElement textAlignment="Right">
+					<font size="22" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Populares]]></text>
+			</staticText>
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="0" width="822" height="65" forecolor="#006699" backcolor="#006699" uuid="1c4fd6a9-9e10-464d-95a7-8d6b43b4ceed"/>
+				<staticText>
+					<reportElement style="Title" x="231" y="0" width="578" height="65" uuid="761a0c3d-a7de-4c9b-8115-f14d9fc90cd3"/>
+					<textElement textAlignment="Right">
+						<font size="54" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Habitaciones]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="14" splitType="Stretch">
+			<frame>
+				<reportElement x="227" y="0" width="575" height="14" uuid="49238a93-91f4-430a-ab97-1ff803dd221c"/>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="0" y="0" width="287" height="14" forecolor="#000000" uuid="23f4381c-e633-4ca7-810d-251b743bbc09"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Habitacion]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" positionType="Float" x="287" y="0" width="287" height="14" forecolor="#000000" uuid="7d3fc22f-ba66-4960-9f04-1bb14fe98e6f"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="true" pdfFontName="Helvetica"/>
+					</textElement>
+					<text><![CDATA[Cantidad]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="227" y="14" width="575" height="1" uuid="eb577323-e29f-4e5e-a1a8-eca62f50bbdf"/>
+			</line>
+			<frame>
+				<reportElement x="227" y="0" width="575" height="14" uuid="52f5d96d-0437-4d73-9b05-c25c134457f4"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="0" y="0" width="287" height="14" uuid="d8d3b376-abaf-4744-990f-749552bb3d33"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Habitacion}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement style="Detail" positionType="Float" x="287" y="0" width="287" height="14" uuid="12728c66-39f1-4d7f-b1e2-8d4c8a17699a"/>
+					<textElement>
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Cantidad}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="219" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="203" width="800" height="16" forecolor="#D0B48E" backcolor="#006699" uuid="a648ae66-cacd-4dd8-8c91-a313408a3884"/>
+				<textField evaluationTime="Report">
+					<reportElement style="Column header" x="753" y="0" width="40" height="16" forecolor="#FFFFFF" uuid="3836f2b8-fc4c-4106-8f8b-9befde7d1c2c"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement style="Column header" x="673" y="0" width="80" height="16" forecolor="#FFFFFF" uuid="9c3474ff-6f91-4043-96ed-b1eaa4d7130a"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+				</textField>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" x="0" y="0" width="197" height="16" forecolor="#FFFFFF" uuid="6051652b-1438-44f8-bcd3-7ee9aed6bd7a"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="12" isBold="false" pdfFontName="Helvetica"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+			<bar3DChart>
+				<chart>
+					<reportElement x="2" y="0" width="209" height="203" uuid="1534b5c9-81ba-4f4a-8fa8-aa03be02d90d"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{Habitacion}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{Habitacion}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{Cantidad}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot orientation="Horizontal"/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</bar3DChart>
+		</band>
+	</summary>
+</jasperReport>
